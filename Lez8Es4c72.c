@@ -105,25 +105,18 @@ void listPair (ListaDiElementi *l1, ListaDiElementi *l2)
 {
     ListaDiElementi copy1 = *l1;
     ListaDiElementi copy2 = *l2;
-    //Creo un puntatore all'inizio di lista2
     ListaDiElementi copycopy2 = copy2;
-    //Creo la terza lista in cui andrò ad inserire l'intesezione della lista 1 con la lista 2
     ListaDiElementi l3 = malloc (sizeof (ElementoDiLista));
     int finelista = 0;
-    //Mi serve per controllare se la lista3 è vuota
     int primaocc = 1;
-    //Mi serve per sapere finché non sono a fine lista 1
     int ok1 = 1;
-    //Mi serve per sapere finché non sono a fine lista 2
     int ok2 = 1;
     while (ok1)
     {
         while (ok2)
         {
-            //Se sono a fine lista 1
             if (copy1->next == NULL)
             {
-                //Se l'elemento a fine lista 1 compare in lista 2 eseguo listCheck ed esco dal ciclo
                 if (copy1->info == copy2->info)
                 {
                     doublesCheck (&l3, copy1->info);
@@ -136,11 +129,9 @@ void listPair (ListaDiElementi *l1, ListaDiElementi *l2)
                     ok1 = 0;
                     ok2 = 0;
                 }
-                //Se l'elemento a fine lista 1 non compare in lista 2 esco comunque dal ciclo
                 else
                     copy2 = copy2->next;
             }
-            //Se lista 3 è vuota
             else if (primaocc && copy1->info == copy2->info)
             {
                 l3->info = copy1->info;
@@ -148,16 +139,13 @@ void listPair (ListaDiElementi *l1, ListaDiElementi *l2)
                 primaocc = 0;
                 ok2 = 0;
             }
-            //Se la lista non è vuota
             else if (copy1->info == copy2->info && copy2->next != NULL)
             {
                 doublesCheck (&l3, copy1->info);
                 copy2 = copy2->next;
             }
-            //Se sono a fine lista 2
             else if (copy2->next == NULL)
             {
-                //Se l'elemento in fondo a lista 2 compare in lista 1
                 if (copy1->info == copy2->info)
                 {
                     doublesCheck (&l3, copy1->info);
@@ -166,11 +154,9 @@ void listPair (ListaDiElementi *l1, ListaDiElementi *l2)
                 else
                     ok2 = 0;
             }
-            //Se l'elemento di lista 1 non è uguale a quello di lista 2, aumento lista 2
             else
                 copy2 = copy2->next;
         }
-        //Finito di controllare se tutti gli elementi di lista 2 compaiono in lista 1, aumento lista 1 e resetto lista 2
         if (ok1)
         {
             copy1 = copy1->next;
@@ -178,7 +164,6 @@ void listPair (ListaDiElementi *l1, ListaDiElementi *l2)
             ok2 = 1;
         }
     }
-    //Adesso posso stampare lista 3
     while (l3->next != NULL)
     {
         printf ("%d\n", l3->info);
