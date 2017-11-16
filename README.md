@@ -1,2 +1,1 @@
-Biscotti
-fritti
+Someday the dream will end.
