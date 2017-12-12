@@ -43,12 +43,12 @@ int main()
 
 	// Read and print the second list :
 	... // add call to procedure / function readList ()
-		printf("Seconda lista\n");
+	printf("Seconda lista\n");
 	printList(second_list);
 
 	// Eliminates Duplicates from the second list :
 	... // add call to procedure / function readList ()
-		printf("Seconda lista senza duplicati\n");
+	printf("Seconda lista senza duplicati\n");
 	printList(second_list);
 
 	// Filter the first list using the elements of the second list :
