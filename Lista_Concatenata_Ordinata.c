@@ -62,14 +62,14 @@ void listOrder(ListaDiElementi *l)
 				ok = 0;
 		}
 	}
-	//Finché non inserisco uno 0 continua ad inserire elementi in lista, in ordine crescente
+	//FinchÃ© non inserisco uno 0 continua ad inserire elementi in lista, in ordine crescente
 	while (ok)
 	{
 		scanf("%d", &check);
-		//Se check è diverso da 0 inserisce l'elemento in lista
+		//Se check Ã¨ diverso da 0 inserisce l'elemento in lista
 		if (check != 0)
 		{
-			//Caso in cui l'elemento sia il più piccolo
+			//Caso in cui l'elemento sia il piÃ¹ piccolo
 			if (check < temp->info)
 			{
 				ListaDiElementi head = malloc(sizeof(ElementoDiLista));
