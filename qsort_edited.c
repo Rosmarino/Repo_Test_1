@@ -93,9 +93,6 @@ void firstSort(int a[], int l, int r)
 		firstSort(a, l, j - 1);
 		firstSort(a, j + 1, r);
 	}
-	for (int i = 0; i < 5; i++)
-		printf("%d\n", a[i]);
-	printf("\n\n\n");
 }
 
 int main()
