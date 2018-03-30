@@ -97,7 +97,7 @@ void firstSort(int a[], int l, int r)
 
 int main()
 {
-	int n, i, trovato = 0;
+	int n, i;
 	scanf("%d", &n);
 	int *a = malloc(n * sizeof(int));
 	for (i = 0; i < n; i++)
