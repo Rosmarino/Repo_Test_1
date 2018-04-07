@@ -9,7 +9,7 @@ int compare (const void *a, const void *b)
 		return 1;
 	else if (*(int*)a % 2 == 0 && *(int*)b % 2 == 0)
 		return (*(int*)a - *(int*)b);
-	else if (*(int*)a % 2 == 1 && *(int*)b % 2 == 1  || *(int*)a % 2 == (-1) && *(int*)b % 2 == 1 || *(int*)a % 2 == 1 && *(int*)b % 2 == (-1) || *(int*)a % 2 == (-1) && *(int*)b % 2 == (-1))
+	else if (*(int*)a % 2 == 1 && *(int*)b % 2 == 1 || *(int*)a % 2 == (-1) && *(int*)b % 2 == 1 || *(int*)a % 2 == 1 && *(int*)b % 2 == (-1) || *(int*)a % 2 == (-1) && *(int*)b % 2 == (-1))
 		return (*(int*)b - *(int*)a);
 }
 
