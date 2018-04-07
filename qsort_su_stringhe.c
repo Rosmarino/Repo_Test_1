@@ -19,7 +19,7 @@ int main()
 		C[i] = malloc(101 * sizeof(char));
 		scanf("%s", C[i]);
 	}
-	qsort(C, n, sizeof(int), compare);
+	qsort(C, n, sizeof(char*), compare);
 	for (i = 0; i < n; i++)
 		printf("%s\n", C[i]);
 	return 0;
