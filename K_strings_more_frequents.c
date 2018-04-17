@@ -11,7 +11,7 @@ int compare(const void *a, const void *b)
 
 int freq(char *A[], int n, int k)
 {
-	char **B = malloc(k * sizeof(char *));
+	char **B = (char **)malloc(k * sizeof(char *));
 	int i, j, counter, longest, z = 0, found, index = 0, check;
 	for (int f = 0; f < n - 2 && z < k; f++)
 	{
@@ -25,10 +25,8 @@ int freq(char *A[], int n, int k)
 			{
 				check = i;
 				for (j = 0; j < z; j++)
-				{
 					if (strcmp(A[i], B[j]) == 0)
 						i++;
-				}
 				if (check == i)
 					found = 1;
 			}
@@ -41,7 +39,7 @@ int freq(char *A[], int n, int k)
 				index = i;
 			}
 		}
-		B[z] = malloc(101 * sizeof(char));
+		B[z] = (char *)malloc(101 * sizeof(char));
 		strcpy(B[z], A[index]);
 		z++;
 	}
@@ -55,10 +53,10 @@ int main()
 	int n, k, i;
 	scanf("%d", &n);
 	scanf("%d", &k);
-	char **A = malloc(n * sizeof(char *));
+	char **A = (char **)malloc(n * sizeof(char *));
 	for (i = 0; i < n; i++)
 	{
-		A[i] = malloc(101 * sizeof(char));
+		A[i] = (char *)malloc(101 * sizeof(char));
 		scanf("%s", A[i]);
 	}
 	freq(A, n, k);
