@@ -24,7 +24,7 @@ void check (ArrayOfCoords A[], ArrayOfInterrogations R[], int N, int M)
     int i, counter;
     for (int j = 0; j < M; j++)
     {
-        int *ArrayOfColours = (int *)malloc(N * sizeof(int));
+        unsigned long int *ArrayOfColours = (unsigned long int *)malloc(N * sizeof(unsigned long int));
         counter = 0;
         int z = 0;
         for (i = 0; i < N; i++)
