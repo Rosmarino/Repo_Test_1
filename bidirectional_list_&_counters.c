@@ -42,7 +42,7 @@ int main()
 		copy = head;
 		scanf("%d", &i);
 
-		//If i > copy then searches the next elements, else the previous
+		//Scrolls the list
 		while (i != copy->info && copy->next != NULL)
 		{
 			copy = copy->next;
