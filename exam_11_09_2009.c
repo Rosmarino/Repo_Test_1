@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct element  //Second list (Group of strings with the same master anagram)
+typedef struct element //Second list (Group of strings with the same master anagram)
 {
 	char info[20];
 	char anagram[20];
