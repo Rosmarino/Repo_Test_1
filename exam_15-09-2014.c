@@ -11,9 +11,9 @@ typedef NodeOfTree *BinaryTree;
 
 int compare(const void *a, const void *b)
 {
-	BinaryTree **a1 = (BinaryTree **)a;
-	BinaryTree **b1 = (BinaryTree **)b;
-	return ((**a1)->key - (**b1)->key);
+	const NodeOfTree *a1 = *(const NodeOfTree **)a;
+	const NodeOfTree *b1 = *(const NodeOfTree **)b;
+	return (a1->key - b1->key);
 }
 
 int leftCheck(BinaryTree t) // Counts the number of the left elements of the current node
@@ -36,9 +36,8 @@ int main()
 	root->left = NULL;
 	root->right = NULL;
 	scanf("%d", &root->key);
-	BinaryTree **A = (BinaryTree**)malloc(N * (sizeof(NodeOfTree)));
-	A[0] = (BinaryTree*)malloc(sizeof(NodeOfTree)); // Array of pointers to binary tree elements
-	*A[0] = root;
+	BinaryTree *A = (BinaryTree*)malloc(N * (sizeof(NodeOfTree))); // Array of pointers to binary tree elements
+	A[0] = root;
 	BinaryTree tempTree; // Scrolls the tree
 	for (i = 1; i < N; i++)
 	{
@@ -54,9 +53,8 @@ int main()
 			{
 				if (tempTree->left == NULL) // Allocates the leaf
 				{
-					tempTree->left = leaf;
-					A[i] = (BinaryTree*)malloc(sizeof(NodeOfTree)); // Points to the new leaf
-					*A[i] = leaf;
+					tempTree->left = leaf; // Points to the new leaf
+					A[i] = leaf;
 					found = 1;
 				}
 				else
@@ -66,9 +64,8 @@ int main()
 			{
 				if (tempTree->right == NULL) // Allocates the leaf
 				{
-					tempTree->right = leaf;
-					A[i] = (BinaryTree*)malloc(sizeof(NodeOfTree)); // Points to the new leaf
-					*A[i] = leaf;
+					tempTree->right = leaf; // Points to the new leaf
+					A[i] = leaf;
 					found = 1;
 				}
 				else
@@ -76,11 +73,11 @@ int main()
 			}
 		}
 	}
-	qsort(A, N, sizeof(BinaryTree*), compare); // Sorts the pointers by node's keys in ascending order
+	qsort(A, N, sizeof(NodeOfTree*), compare); // Sorts the pointers by node's keys in ascending order
 	for (i = 0; i < N; i++)
 	{
-		if (leftCheck (*A[i]) > rightCheck (*A[i])) // Prints the nodes with "L(u) > (Ru)"
-			printf("%d\n", (*A[i])->key);
+		if (leftCheck(A[i]) > rightCheck(A[i])) // Prints the nodes with "L(u) > (Ru)"
+			printf("%d\n", A[i]->key);
 	}
 	return 0;
 }
