@@ -16,6 +16,28 @@ int compare(const void *a, const void *b)
 	return (a1->key - b1->key);
 }
 
+int leftCheck(BinaryTree t) // Counts the number of the left elements of the current node
+{
+	int counter = 0;
+	while (t->left != NULL)
+	{
+		counter++;
+		t = t->left;
+	}
+	return counter;
+}
+
+int rightCheck(BinaryTree t) // Counts the number of the right elements of the current node
+{
+	int counter = 0;
+	while (t->right!= NULL)
+	{
+		counter++;
+		t = t->right;
+	}
+	return counter;
+}
+
 int main()
 {
 	int N, i;
