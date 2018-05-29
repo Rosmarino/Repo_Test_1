@@ -1,93 +1,73 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct _node // Binary tree
-{
-	struct _node *left;
+struct TreeN {
 	int key;
-	struct _node *right;
-}NodeOfTree;
-typedef NodeOfTree *BinaryTree;
+	struct TreeN* sx;
+	struct TreeN* dx;
+};
 
-int compare(const void *a, const void *b)
+typedef struct TreeN NodeTree;
+typedef NodeTree *Tree;
+
+void inserimento (Tree* T, NodeTree* nt)
 {
-	const NodeOfTree *a1 = *(const NodeOfTree **)a;
-	const NodeOfTree *b1 = *(const NodeOfTree **)b;
-	return (a1->key - b1->key);
+	NodeTree *x;
+	x = *T;
+	NodeTree *y = NULL;
+	while (x != NULL)
+	{
+		y = x;
+		if (nt->key < x->key)
+			x = x->sx;
+		else
+			x = x->dx;
+	}
+	if (y == NULL)
+		*T = nt;
+	else
+	{
+		if (y->key > nt->key)
+			y->sx = nt;
+		else
+			y->dx = nt;
+	}
 }
 
-int leftCheck(BinaryTree t) // Counts the number of the left elements of the current node
+struct Vis {
+	int dx;
+	int sx;
+};
+
+struct Vis visita (NodeTree *u)
 {
-	int counter = 0;
-	while (t->left != NULL)
-	{
-		counter++;
-		t = t->left;
-	}
-	return counter;
+	struct Vis result;
+	result.dx = 0;
+	result.sx = 0;
+	if (u == NULL)
+		return result;
+	int sx = visita (u->sx).sx;
+	int dx = visita (u->dx).dx;
+	if (sx > dx)
+		printf("%d\r\n", u->key);
+	result.sx = sx + 1;
+	result.dx = dx + 1;
+	return result;
 }
 
-int rightCheck(BinaryTree t) // Counts the number of the right elements of the current node
+int main(int argc, char **argv)
 {
-	int counter = 0;
-	while (t->right!= NULL)
+	int n, key;
+	Tree *T = malloc (sizeof(NodeTree*));;
+	scanf(" %d", &n);
+	for (int i = 0; i < n; i++)
 	{
-		counter++;
-		t = t->right;
+		NodeTree* u = malloc(sizeof(NodeTree));
+		scanf (" %d", &key);
+		u->key = key;
+		inserimento(T, u);
 	}
-	return counter;
-}
-
-int main()
-{
-	int N, i;
-	scanf("%d", &N); // Number of elements
-	BinaryTree root = (BinaryTree)malloc(sizeof(NodeOfTree)); // First element of the binary tree (root)
-	root->left = NULL;
-	root->right = NULL;
-	scanf("%d", &root->key);
-	BinaryTree *A = (BinaryTree*)malloc(N * (sizeof(NodeOfTree))); // Array of pointers to binary tree elements
-	A[0] = root;
-	BinaryTree tempTree; // Scrolls the tree
-	for (i = 1; i < N; i++)
-	{
-		int found = 0;
-		tempTree = root;
-		BinaryTree leaf = (BinaryTree)malloc(sizeof(NodeOfTree));
-		scanf("%d", &leaf->key);
-		leaf->left = NULL;
-		leaf->right = NULL;
-		while (!found)
-		{
-			if (leaf->key <= tempTree->key) //Left node
-			{
-				if (tempTree->left == NULL) // Allocates the leaf
-				{
-					tempTree->left = leaf; // Points to the new leaf
-					A[i] = leaf;
-					found = 1;
-				}
-				else
-					tempTree = tempTree->left; // Keeps scrolling
-			}
-			else // Right node
-			{
-				if (tempTree->right == NULL) // Allocates the leaf
-				{
-					tempTree->right = leaf; // Points to the new leaf
-					A[i] = leaf;
-					found = 1;
-				}
-				else
-					tempTree = tempTree->right; // Keeps scrolling
-			}
-		}
-	}
-	qsort(A, N, sizeof(NodeOfTree*), compare); // Sorts the pointers by node's keys in ascending order
-	for (i = 0; i < N; i++)
-	{
-		if (leftCheck(A[i]) > rightCheck(A[i])) // Prints the nodes with "L(u) > (Ru)"
-			printf("%d\n", A[i]->key);
-	}
+	visita (*T);
 	return 0;
 }
+
