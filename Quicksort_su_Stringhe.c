@@ -1,53 +1,54 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
-int distribuzione(char *a[], int sx, int px, int dx) 
-{ 
-	int j, i = sx - 1;
-	char pivot[101], swap[101];
-	strcpy(pivot, a[dx]);
-	for (j = sx; j <= dx - 1; j++)
-	{
-		if (strcmp(a[j], pivot) <= 0)
-		{
-			i++;
-			strcpy(swap, a[i]);
-			strcpy(a[i], a[j]);
-			strcpy(a[j], swap);
-		}
-	}
-	strcpy(swap, a[i + 1]);
-	strcpy(a[i + 1], a[dx]);
-	strcpy(a[dx], swap);
-	return i + 1;
-}
-
-void quicksort(char *a[], int sx, int dx ) 
-{ 
-	int perno, pivot;
-	if(sx < dx) 
-	{
-		pivot = (sx + dx)/ 2;
-		perno = distribuzione(a, sx, pivot, dx);
-		quicksort(a, sx, perno - 1);
-		quicksort(a, perno + 1, dx);   
-	}
-}
-
-int main() 
+void swap(char **a, char **b)
 {
-	int i, n;
-	scanf("%d", &n);
-	char **a;
-	a = (char **)malloc(n * sizeof(char *));
-	for (i = 0; i < n; i++)
-	{
-		a[i] = (char *)malloc(101 * sizeof(char));
-		scanf("%s", a[i]);
-	}
-	quicksort(a, 0, n-1);
-	for(i = 0; i < n; i++ ) 
-		printf("%s\n", a[i]);	
-	return 0;
+    char c[101];
+    strcpy(c, *a);
+    strcpy(*a, *b);
+    strcpy(*b, c);
+}
+
+int partition (char *A[], int p, int r)
+{
+    char x[101]; // Pivot of the last element
+    strcpy(x, A[r]);
+    int i = p - 1; // Increases in the cycle
+    for (int j = p; j < r; j++)
+    {
+        if (strcmp(A[j], x) <= 0)
+        {
+            i++;
+            swap(&A[i], &A[j]); // Swap the elements by their addresses
+        }
+    }
+    swap(&A[i + 1], &A[r]);
+    return i + 1; // Returns the new pivot
+}
+
+void quicksort (char *A[], int p, int r)
+{
+    if (p < r) // If there are elements left
+    {
+        int q = partition(A, p, r); // Calls partition
+        quicksort(A, p, q - 1); // Recursively calls quicksort on the first n/2 side
+        quicksort(A, q + 1, r); // Recursively calls quicksort on the second n/2 side
+    }
+}
+
+int main ()
+{
+    int n = 0, i = 0;
+    scanf("%d", &n); // Number of elements
+    char **A = (char**) malloc (n * sizeof(char*)); // Multi-dimentional array of strings
+    for (i = 0; i < n; i++) // Fills the array
+    {
+        A[i] = (char*) malloc (101 * sizeof(char)); // String of 100 char in the 'i' position
+        scanf("%s", A[i]);
+    }
+    quicksort(A, 0, n - 1); // Quicksort call
+    for (i = 0; i < n; i++) // Prints the array
+        printf("%s\n", A[i]);
+    return 0;
 }
