@@ -14,7 +14,7 @@ void PrintSphere (SphereOfStats Sphere[], int free) // Prints the full sphere at
 {
     printf("The current sphere is:\n\n");
     for (int i = 0; i < 10; i++)
-        printf("[%s] = %d. Current number of spheres = %d\n", Sphere[i]->info, Sphere[i]->number, Sphere[i]->total);
+        printf("[%s] = %d. Current number of spheres = %d\n", Sphere[i]->info, Sphere[i]->total, Sphere[i]->number);
     printf("Number of free spaces = %d\n\n", free);
 }
 
@@ -62,7 +62,7 @@ int main ()
 	}
     }
     PrintSphere(Sphere, free);
-    char yes, print, keep, operation;
+    char yes, print, keep, wish, operation;
     int check = 0, quantity = 0;
     while (yes != 'n') // While you want to modify the sphere
     {
@@ -125,6 +125,12 @@ int main ()
                             printf("Wrong selection\n");
                         printf("Current %s: Number of spheres = %d. Stat's amount = %d.\nDo you wish to continue to modify this stat? y / n\n", Sphere[check]->info, Sphere[check]->number, Sphere[check]->total);
                         scanf("\n%c", &keep);
+                        if(check == 0)
+                            printf("You still need %d spheres to reach the perfect stat\n", (99999 - Sphere[check]->total) / 300);
+                        else if(check == 5)
+                            printf("You still need %d spheres to reach the perfect stat\n", (999 - Sphere[check]->total) / 40);
+                        else
+                            printf("You still need %d spheres to reach the perfect stat\n", (255 - Sphere[check]->total) / 4);
                     }
                 }
             }
