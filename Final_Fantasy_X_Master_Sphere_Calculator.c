@@ -173,11 +173,13 @@ int main ()
                     printf("Current %s: Number of spheres = %d. Stat's amount = %d.\nDo you wish to continue to modify this stat? y / n\n", Sphere[check]->info, Sphere[check]->number, Sphere[check]->total);
                     scanf("\n%c", &keep);
                     if(check == 0)
-                        printf("You still need %d spheres to reach the perfect stat\n", (99999 - Sphere[check]->total) / 300);
+                        printf("You still need %d spheres to reach the perfect stat\n", (99900 - Sphere[check]->total) / 300);
                     else if(check == 5)
-                        printf("You still need %d spheres to reach the perfect stat\n", (999 - Sphere[check]->total) / 40);
+                        printf("You still need %d spheres to reach the perfect stat\n", (1000 - Sphere[check]->total) / 40);
+                    else if(check == 7)
+                        printf("You still need %d spheres to reach the perfect stat\n", (240 - Sphere[check]->total) / 4);
                     else
-                        printf("You still need %d spheres to reach the perfect stat\n", (255 - Sphere[check]->total) / 4);
+                        printf("You still need %d spheres to reach the perfect stat\n", (252 - Sphere[check]->total) / 4);
                 }
             }
         }
