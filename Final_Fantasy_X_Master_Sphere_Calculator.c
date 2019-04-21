@@ -111,18 +111,51 @@ int main ()
                     {
                         printf("Do you wish to add or subtract? + / -\n");
                         scanf("\n%c %d", &operation, &quantity);
-                        if (operation == '+')
+                        if (check == 0) // HP
                         {
-                            Sphere[check]->number += quantity;
-                            Sphere[check]->total += quantity * 4;
+                            if (operation == '+')
+                            {
+                                Sphere[check]->number += quantity;
+                                Sphere[check]->total += quantity * 300;
+                            }
+                            else if (operation == '-')
+                            {
+                                Sphere[check]->number -= quantity;
+                                Sphere[check]->total -= quantity * 300;
+                            }
+                            else
+                                printf("Wrong operation\n");
                         }
-                        else if (operation == '-')
+                        else if (check == 5) // MP
                         {
-                            Sphere[check]->number -= quantity;
-                            Sphere[check]->total -= quantity * 4;
+                            if (operation == '+')
+                            {
+                                Sphere[check]->number += quantity;
+                                Sphere[check]->total += quantity * 40;
+                            }
+                            else if (operation == '-')
+                            {
+                                Sphere[check]->number -= quantity;
+                                Sphere[check]->total -= quantity * 40;
+                            }
+                            else
+                                printf("Wrong operation\n");
                         }
                         else
-                            printf("Wrong operation\n");
+                        {
+                            if (operation == '+')
+                            {
+                                Sphere[check]->number += quantity;
+                                Sphere[check]->total += quantity * 4;
+                            }
+                            else if (operation == '-')
+                            {
+                                Sphere[check]->number -= quantity;
+                                Sphere[check]->total -= quantity * 4;
+                            }
+                            else
+                                printf("Wrong operation\n");
+                        }
                     }
                     else if (quantity == 2) // Stat's amount
                     {
