@@ -69,74 +69,92 @@ int main ()
         keep = 'y';
         printf("Do you want to modify the Sphere? y / n\n");
         scanf("\n%c", &yes);
+        while (yes != 'y' && yes != 'n')
+        {
+            printf("Wrong operation.\nDo you want to modify the Sphere? y / n\n");
+            scanf("\n%c", &yes);        
+        }
         if(yes == 'y')
         {
             printf("Select the stat you want to modify:\n[0] - HP\n[1] - STRENGHT\n[2] - DEFENSE\n[3] - MAGIC\n[4] - MAGIC DEFENSE\n[5] - MP\n[6] - AGILITY\n[7] - LUCK\n[8] - EVASION\n[9] - ACCURACY\n[10] - FREE SPACES\n");
             scanf("%d", &check);
-            if(check >= 0 && check <= 10)
+            while(check < 0 || check > 10)
             {
-                if (check == 10)
+                printf("Wrong choice.\nSelect the stat you want to modify:\n[0] - HP\n[1] - STRENGHT\n[2] - DEFENSE\n[3] - MAGIC\n[4] - MAGIC DEFENSE\n[5] - MP\n[6] - AGILITY\n[7] - LUCK\n[8] - EVASION\n[9] - ACCURACY\n[10] - FREE SPACES\n");
+                scanf("%d", &check);
+            }
+            if (check == 10)
+            {
+                printf("You selected FREE SPACES:\n");
+                while (keep != 'n')
                 {
-                    printf("You selected FREE SPACES:\n");
-                    while (keep == 'y')
+                    printf("Do you wish to add or subtract? + / -\n");
+                    scanf("\n%c %d", &operation, &quantity);
+                    if(operation == '+')
+                        free += quantity;
+                    else if (operation == '-')
+                        free -= quantity;
+                    else
+                        printf("Wrong operation.\n");
+                    printf("Current FREE SPACES = %d. Do you wish to continue to modify this stat? y / n\n", free);
+                    scanf("\n%c", &keep);
+                }
+            }
+            else
+            {
+                printf("You selected %s:\n", Sphere[check]->info);
+                while (keep != 'n')
+                {
+                    printf("Which paramether do you wish to edit?\n[1] - Number of spheres\n[2] - Stat's amount\n");
+                    scanf("%d", &quantity);
+                    if (quantity == 1) // Number of spheres
                     {
                         printf("Do you wish to add or subtract? + / -\n");
                         scanf("\n%c %d", &operation, &quantity);
-                        if(operation == '+')
-                            free += quantity;
+                        if (operation == '+')
+                        {
+                            Sphere[check]->number += quantity;
+                            Sphere[check]->total += quantity * 4;
+                        }
                         else if (operation == '-')
-                            free -= quantity;
+                        {
+                            Sphere[check]->number -= quantity;
+                            Sphere[check]->total -= quantity * 4;
+                        }
                         else
-                            printf("Wrong operation.\n");
-                        printf("Current FREE SPACES = %d. Do you wish to continue to modify this stat? y / n\n", free);
-                        scanf("\n%c", &keep);
+                            printf("Wrong operation\n");
                     }
-                }
-                else
-                {
-                    printf("You selected %s:\n", Sphere[check]->info);
-                    while (keep == 'y')
+                    else if (quantity == 2) // Stat's amount
                     {
-                        printf("Which paramether do you wish to edit?\n[1] - Number of spheres\n[2] - Stat's amount\n");
-                        scanf("%d", &quantity);
-                        if (quantity == 1) // Number of spheres
-                        {
-                            printf("Do you wish to add or subtract? + / -\n");
-                            scanf("\n%c %d", &operation, &quantity);
-                            if (operation == '+')
-                                Sphere[check]->number += quantity;
-                            else if (operation == '-')
-                                Sphere[check]->number -= quantity;
-                            else
-                                printf("Wrong operation\n");
-                        }
-                        else if (quantity == 2) // Stat's amount
-                        {
-                            printf("Do you wish to add or subtract? + / -\n");
-                            scanf("\n%c %d", &operation, &quantity);
-                            if (operation == '+')
-                                Sphere[check]->total += quantity;
-                            else if (operation == '-')
-                                Sphere[check]->total -= quantity;
-                            else
-                                printf("Wrong operation\n");
-                        }
+                        printf("Do you wish to add or subtract? + / -\n");
+                        scanf("\n%c %d", &operation, &quantity);
+                        if (operation == '+')
+                            Sphere[check]->total += quantity;
+                        else if (operation == '-')
+                            Sphere[check]->total -= quantity;
                         else
-                            printf("Wrong selection\n");
-                        printf("Current %s: Number of spheres = %d. Stat's amount = %d.\nDo you wish to continue to modify this stat? y / n\n", Sphere[check]->info, Sphere[check]->number, Sphere[check]->total);
-                        scanf("\n%c", &keep);
-                        if(check == 0)
-                            printf("You still need %d spheres to reach the perfect stat\n", (99999 - Sphere[check]->total) / 300);
-                        else if(check == 5)
-                            printf("You still need %d spheres to reach the perfect stat\n", (999 - Sphere[check]->total) / 40);
-                        else
-                            printf("You still need %d spheres to reach the perfect stat\n", (255 - Sphere[check]->total) / 4);
+                            printf("Wrong operation\n");
                     }
+                    else
+                        printf("Wrong selection\n");
+                    printf("Current %s: Number of spheres = %d. Stat's amount = %d.\nDo you wish to continue to modify this stat? y / n\n", Sphere[check]->info, Sphere[check]->number, Sphere[check]->total);
+                    scanf("\n%c", &keep);
+                    if(check == 0)
+                        printf("You still need %d spheres to reach the perfect stat\n", (99999 - Sphere[check]->total) / 300);
+                    else if(check == 5)
+                        printf("You still need %d spheres to reach the perfect stat\n", (999 - Sphere[check]->total) / 40);
+                    else
+                        printf("You still need %d spheres to reach the perfect stat\n", (255 - Sphere[check]->total) / 4);
                 }
             }
         }
         printf("Do you want to print the current Sphere? y / n\n");
         scanf("\n%c", &print);
+        while (print != 'y' && print != 'n')
+        {
+            printf("Wrong operation.\nDo you want to print the current Sphere? y / n\n");
+            scanf("\n%c", &print);
+        }
         if(print == 'y')
             PrintSphere(Sphere, free);
     }
