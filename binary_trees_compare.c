@@ -94,7 +94,6 @@ ListOfElements RouteTracer (ListOfElements Route, BinaryTree T, int k)
     return Head;
 }
 
-
 int main ()
 {
     int n = 0, k = 0;
